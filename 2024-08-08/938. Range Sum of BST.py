@@ -64,9 +64,9 @@ class Solution:
             
             if low <= node.val <= high:
                 res += node.val # res += 15
-            if node.val <= high: # 15 <= input [7, 15]
+            if node.val < high: # 15 < input [7, 15]
                 dfs(root.right) # root.right -> 18 (not included in res)
-            if node.val >= low:
+            if node.val > low:
                 dfs(root.left)
 
         dfs(root)
