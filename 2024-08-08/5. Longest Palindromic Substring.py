@@ -1,52 +1,59 @@
 from typing import List
 
-# 283. Move Zeroes
-# Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
-
-# Note that you must do this in-place without making a copy of the array.
-
- 
+# 5. Longest Palindromic Substring
+# Given a string s, return the longest palindromic substring in s.
 
 # Example 1:
 
-# Input: nums = [0,1,0,3,12]
-# Output: [1,3,12,0,0]
+# Input: s = "babad"
+# Output: "bab"
+# Explanation: "aba" is also a valid answer.
 # Example 2:
 
-# Input: nums = [0]
-# Output: [0]
+# Input: s = "cbbd"
+# Output: "bb"
  
 
 # Constraints:
 
-# 1 <= nums.length <= 104]
-# -231 <= nums[i] <= 231 - 1
+# 1 <= s.length <= 1000
+# s consist of only digits and English letters.
 
 class Solution:
-    def moveZeroes(self, nums: List[int]) -> List[int]:
-        #p to track result  p1
-        #1,3,12,0,0
-        #0 1 2 3 4
-        #      p 
-        #        p1
-        #nums = [0]
-        p, p1 = 0, 0 
-        n = len(nums) #n = 1
-        while p1 < n:
-            if nums[p1] != 0:
-                nums[p],nums[p1] = nums[p1],nums[p]
-                p += 1
-            p1 += 1
-        
-        
+    def getPalindromicSubstring(s: str) -> str:
+        # substring l  mid  r   b a b     b | b
+        # track length of the substring , keep update res
+        # mid  "c b a a a b c e"   "c b b | b b c e"   
+        #      |  l       r    |     |  l      r  |
+        # "bbb" "bb"
+        # Input: s = "b a b a d"
+        #             0 1 2 3 4 
+        # Output: "bab"
+        #"b a  a  a  d"
+        # 0 1  2  3  4
+        #   l     r
+        max_l = 0
+        n = len(s)
+        start = 0
+        for i in range(n):#n = 4  i = 1
+            l = r = i # l = r = 1
+            cur_l = 1 # a
+            while r < n - 1 and s[r] == s[r + 1]: #a == a?  
+                r += 1
+                cur_l += 1
+            while l > 0 and r < n - 1 and s[l - 1] == s[r + 1]:# l r -> a i = 1 b == d?
+                cur_l += 2 # cur_l = 3
+                l -= 1 # l = 0 r = 2
+                r += 1
+            if cur_l > max_l:# 3 > 1
+                start = l # start = 0
+                max_l = cur_l # max_l = 1
+        return s[start: start + max_l] # start = 0 [0: 0 + 3]
+            
+            
 
 
-
-
-
-
-
-
+            
 
 
 
