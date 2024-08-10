@@ -13,13 +13,13 @@ from typing import List
 # Explanation: In all examples the original and cloned trees are shown. The target node is a green node from the original tree. The answer is the yellow node from the cloned tree.
 #      7                        7
 #     / \                      / \
-#    4   3 <- target          4   3<-  
+#    4   3 <- target          4   3<-  return
 #       / \                      / \
 #      6   19                   6   19
 # Input: tree = [7],cloned =[7], target =  7
 # Output: 7
 
-#  7 <- target      7<- 
+#  7 <- target      7<- return
 
 # Input: tree = [8,null,6,null,5,null,4,null,3,null,2,null,1],cloned =[8,null,6,null,5,null,4,null,3,null,2,null,1], target = 4
 # Output: 4
@@ -27,9 +27,9 @@ from typing import List
 #       \                                    \
     #     6                                   6
     #       \                                  \
-        #      5                                 5
+        #     4                                 4
         #       \                                 \
-            #      4  <- target                    4 <-
+   #  cur  ->      4  <- target                    4 <-return  
             #       \                               \
                 #     3                              3
                 #       \                              \
@@ -53,6 +53,26 @@ class TreeNode:
 
 
 class Solution:
-    def findClonedNode(self, original_root: TreeNode, clone_root: TreeNode, target: int) -> TreeNode:
-        
-        
+    def findClonedNode(self, original_root: TreeNode, clone_root: TreeNode, target: TreeNode) -> TreeNode:
+        # traverse through the original_root and clone_root using p1 and p2 ptrs
+        # compare p1 with target, if a match, return p2
+        q1 = deque([original_root])
+        q2 = deque([clone_root])
+        # p1 = original_root
+        # p2 = clone_root
+
+        while q1 and q2:
+            node1 = q1.popleft()
+            node2 = q2.popleft()
+            if node1 is None or node2 is None:
+                return
+            else:
+                if node1 == target:   
+                    return node2
+                else:
+                    q1.append(original_root.left)
+                    q1.append(original_root.right)
+                    q2.append(clone_root.left)
+                    q2.append(clone_root.right)
+
+        return None
