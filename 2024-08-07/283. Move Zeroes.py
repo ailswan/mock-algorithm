@@ -5,8 +5,6 @@ from typing import List
 
 # Note that you must do this in-place without making a copy of the array.
 
- 
-
 # Example 1:
 
 # Input: nums = [0,1,0,3,12]
@@ -15,11 +13,11 @@ from typing import List
 
 # Input: nums = [0]
 # Output: [0]
- 
+
 
 # Constraints:
 
-# 1 <= nums.length <= 104]
+# 1 <= nums.length <= 104
 # -231 <= nums[i] <= 231 - 1
 
 class Solution:
@@ -32,6 +30,7 @@ class Solution:
         #nums = [0]
         p, p1 = 0, 0 
         n = len(nums) #n = 1
+
         while p1 < n:
             if nums[p1] != 0:
                 nums[p],nums[p1] = nums[p1],nums[p]

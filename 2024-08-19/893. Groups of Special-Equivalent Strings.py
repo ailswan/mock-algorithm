@@ -93,6 +93,9 @@ def numSpecialEquivGroups(self, words: List[str]) -> int:
         #{'bdac':3, }
         return len({encode(word) for word in words})
 # time => (NlogN)
-# space => (1)
+# space => (n)
+#m words  n length of each word
+# time => O(m*nlogn)
+# space =>O(m*n)
 
     # counter[sorted(word1) + sorted(word2)] += 1
