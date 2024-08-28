@@ -118,3 +118,29 @@ class Solution:
                 dfs(node.right)
         dfs(root)
         return root
+    
+
+class Solution:
+    def insertIntoMaxTree(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        valNode = TreeNode(val)
+
+        def dfs(node, parent=None):
+            if node is None:
+                return
+            if valNode.val > node.val:
+                valNode.left = node
+                if parent is None:
+                    return valNode
+                else:
+                    if parent.left == node:
+                        parent.left = valNode
+                    else:
+                        parent.right = valNode
+                return
+            if node.right:
+                dfs(node.right, node)
+            else:
+                node.right = valNode
+
+        new_root = dfs(root)
+        return new_root if new_root else root
