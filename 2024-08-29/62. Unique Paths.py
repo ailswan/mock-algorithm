@@ -23,3 +23,32 @@ from typing import List
 # 1. Right -> Down -> Down
 # 2. Down -> Down -> Right
 # 3. Down -> Right -> Down
+
+class Solution:
+    def uniquePath(self, m: int, n: int) -> int:
+        # [0, 0]   [m - 1][n - 1] can only comes from top and left
+        # dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+        # dp[0][0] = 1
+        #first row dp[0][j] = 1
+        #first col dp[i][0] = 1
+        dp = [[1]* n for i in range(m)]
+        for i in range(1, m):
+            for j in range(1, n):
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+        return dp[m - 1][n - 1]
+#time complexity O(m * n)
+#space complexity O(m * n)
+class Solution:
+    def uniquePath(self, m: int, n: int) -> int:
+        # two rows swith the value to tracking current row's value
+        # dp2[i] = dp2[i - 1] + dp1[i]
+        # dp1 = dp2
+        # 
+        dp1 = [1] * n
+        dp2 = [1] * n
+        for _ in range(1, m):
+            for i in range(1, n):
+                dp2[i] = dp2[i - 1] + dp1[i]
+                dp1 = dp2
+        return dp2[-1]
+            
