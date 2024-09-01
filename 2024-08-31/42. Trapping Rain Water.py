@@ -31,10 +31,13 @@ class Solution:
         
         n = len(height) # 6
         total = 0
-        max_left = 0
-        max_right = 0
+        left_max = 0
+        right_max = 0
         left, right = 0, len(n) - 1
 
+        # 4   3 6 9  7  8
+        #     l         r
+        #     *
         while left < right:
             if height[left] < height[right]:            # 2 < 5? T
                 left_max = max(left_max, height[left])  # left_max = max(0, 4) -> 4
