@@ -83,3 +83,10 @@ import re
 def is_number(s):
     pattern = r'^-?\d+(?:\.\d+)?$'
     return bool(re.match(pattern, s))
+
+def is_number(s):
+    try:
+        float(s)  # Or int(s) for checking integers only
+        return True
+    except ValueError:
+        return False
